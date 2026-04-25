@@ -447,6 +447,54 @@
           card.style.transition = '';
         }, 700 + i * 120);
       });
+
+      // --- Mouse Drag to Scroll ---
+      if (container) {
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+        let hasDragged = false;
+
+        container.style.cursor = 'grab';
+
+        container.addEventListener('mousedown', (e) => {
+          isDown = true;
+          hasDragged = false;
+          startX = e.pageX - container.offsetLeft;
+          scrollLeft = container.scrollLeft;
+          container.style.cursor = 'grabbing';
+          container.style.userSelect = 'none';
+        });
+
+        container.addEventListener('mouseleave', () => {
+          isDown = false;
+          container.style.cursor = 'grab';
+        });
+
+        container.addEventListener('mouseup', () => {
+          isDown = false;
+          container.style.cursor = 'grab';
+          container.style.userSelect = '';
+        });
+
+        container.addEventListener('mousemove', (e) => {
+          if (!isDown) return;
+          e.preventDefault();
+          const x = e.pageX - container.offsetLeft;
+          const walk = (x - startX) * 1.5;
+          if (Math.abs(walk) > 5) hasDragged = true;
+          container.scrollLeft = scrollLeft - walk;
+        });
+
+        // Block link clicks if user dragged (not just clicked)
+        container.addEventListener('click', (e) => {
+          if (hasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+            hasDragged = false;
+          }
+        }, true);
+      }
     });
 </script>
 </body>
