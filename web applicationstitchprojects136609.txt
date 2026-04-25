@@ -1,0 +1,37 @@
+web application/stitch/projects/13660970125001700107/screens/1c5a101d515a41cb8e6c446fb8dd7939
+# Project Brief: Premium Links Hub - Coimbra Academy
+
+## 1. Project Overview
+The goal of this project is to create a high-end, high-conversion landing page (Links Hub) designed for professionals and educational institutions. The design focuses on personal branding, authority building, and providing a streamlined "link-in-bio" experience for desktop and mobile users.
+
+## 2. Target Audience
+- High-performance professionals (Nutritionists, Speakers, Mentors).
+- Students and potential clients looking for professional services.
+- Social media followers transitioning to deeper service engagement.
+
+## 3. Core Design Principles
+- **Visual Authority:** Use of high-quality professional photography integrated with brand elements.
+- **Modern Minimalism:** A clean palette of whites, greys, and deep blues/blacks to convey trust and professionalism.
+- **Interactive Focus:** Clear call-to-action (CTA) cards with hover states to guide the user journey.
+- **Brand Consistency:** Large, subtle watermark typography in the background to reinforce brand identity without cluttering the UI.
+
+## 4. Key Features
+- **Hero Section:** Large professional portrait with integrated branding and social media handles.
+- **Interactive Link Cards:** A carousel or grid of cards for:
+    - Event & Lecture bookings.
+    - Appointment scheduling.
+    - Post-graduate course information.
+    - Main institutional website access.
+- **Responsive Design:** Seamless transition from a high-impact desktop layout to a functional mobile-first "Linktree" style.
+- **Legal Compliance:** Dedicated footer area for LGPD (Privacy Policy) and copyright information.
+
+## 5. Technical Requirements
+- **Framework:** High-fidelity HTML/CSS layout.
+- **Typography:** Sans-serif fonts (e.g., Montserrat, Inter) for a modern, tech-forward feel.
+- **Visuals:** Support for PNG/WebP with transparency for overlapping portrait effects.
+
+## 6. Project Milestones
+1.  **Phase 1: Brand Concept Replication** (Completed) - Replicating the core "Coimbra Academy" aesthetic.
+2.  **Phase 2: Component Standardization** - Defining shared UI elements (Cards, Buttons, Footer).
+3.  **Phase 3: Multi-state Generation** - Creating hover, active, and loading states.
+4.  **Phase 4: Mobile Adaptation** - Optimizing the flow for handheld devices.

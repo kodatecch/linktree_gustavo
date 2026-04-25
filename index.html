@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="overflow-x-hidden max-w-[100vw]">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Gustavo Mariano - Corretor de Seguros</title>
+<meta name="description" content="Acesse todos os links, sites e contatos oficiais de Gustavo Mariano, Corretor de Seguros." />
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Lucide Icons for representation -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<style data-purpose="typography">
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap');
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+    }
+
+    .hero-title {
+      font-weight: 900;
+      font-style: italic;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+</style>
+<style data-purpose="custom-layouts">
+    .main-container {
+      background: linear-gradient(135deg, #186096 0%, #0d3b60 100%);
+      border-radius: 1.5rem; /* Ajustado para mobile */
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .main-container { border-radius: 2.5rem; }
+    }
+
+    .bg-text-overlay {
+      position: absolute;
+      font-size: 8rem; /* Mobile size */
+      font-weight: 900;
+      color: rgba(255, 255, 255, 0.05);
+      z-index: 0;
+      white-space: nowrap;
+      pointer-events: none;
+      font-style: italic;
+      top: 10%;
+      left: -10%;
+      line-height: 0.8;
+      transition: all 0.3s ease;
+    }
+    @media (min-width: 768px) {
+      .bg-text-overlay { font-size: 14rem; top: 15%; left: -5%; }
+    }
+    @media (min-width: 1024px) {
+      .bg-text-overlay { font-size: 18rem; }
+    }
+
+    /* Cards e Estados (Phase 3) */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border-radius: 1.5rem;
+      cursor: pointer;
+    }
+    .glass-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    .glass-card:active {
+      transform: translateY(-2px);
+    }
+
+    .active-card {
+      background: rgba(243, 244, 246, 0.98);
+      color: #111;
+      border-radius: 1.5rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+    .active-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(255,255,255,0.3), 0 10px 20px rgba(0,0,0,0.05);
+      background: #ffffff;
+    }
+
+    .person-image {
+      mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+      transition: opacity 0.3s ease;
+    }
+
+    /* Mobile Adaptation for Image (Removida opacidade) */
+    @media (max-width: 1023px) {
+      .person-image {
+        transform: translate(15%, 5%);
+      }
+    }
+
+    .footer-bg {
+      background-color: #2a84c2;
+      border-radius: 1.5rem;
+    }
+
+    .hide-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .hide-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+</style>
+</head>
+<body class="py-4 px-2 md:py-6 md:px-4 lg:py-8 lg:px-6 bg-white overflow-x-hidden max-w-[100vw]">
+<!-- BEGIN: TopNavigation (Header) -->
+<header class="w-full flex flex-row justify-between items-center mb-4 md:mb-6 px-2 lg:px-4" data-purpose="top-navigation">
+  <div class="flex items-center gap-3">
+    <img alt="Gustavo Mariano Logo" class="h-10 lg:h-12 mix-blend-multiply" id="main-logo" src="logo_animacao1.svg"/>
+    <span class="font-bold text-gray-900 text-lg lg:text-xl tracking-tight">Gustavo Mariano</span>
+  </div>
+  <a href="https://instagram.com/gustavomariano" target="_blank" class="flex items-center justify-center text-gray-700 hover:text-black transition-all bg-white shadow-sm p-2.5 lg:p-3 rounded-full border border-gray-200 hover:bg-gray-50 hover:shadow-md">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+    </svg>
+  </a>
+</header>
+<!-- END: TopNavigation -->
+
+<!-- BEGIN: MainContainer -->
+<main class="main-container w-full mx-auto min-h-[85vh] lg:min-h-[800px] flex flex-col shadow-2xl">
+  <!-- Wrapper para texto de fundo com overflow-hidden para não vazar -->
+  <div class="absolute inset-0 overflow-hidden rounded-[1.5rem] md:rounded-[2.5rem] pointer-events-none z-0">
+    <div class="bg-text-overlay">MARIANO</div>
+  </div>
+
+  <!-- BEGIN: HeroSection -->
+  <div class="relative flex-grow grid grid-cols-12 px-6 lg:px-12 items-center" data-purpose="hero-content">
+    <!-- Left Content -->
+    <div class="col-span-12 lg:col-span-6 z-20 py-8 lg:py-12 relative flex flex-col items-start text-left">
+      <h1 class="hero-title text-5xl sm:text-7xl lg:text-8xl text-white mb-4 italic tracking-tight drop-shadow-md z-10 relative">
+        MEUS<br/>LINKS
+      </h1>
+      <p class="text-blue-50 text-lg lg:text-xl font-medium max-w-[60%] sm:max-w-sm">
+        Confira abaixo <span class="font-bold text-white">meus principais links</span>
+      </p>
+    </div>
+    
+    <!-- Right Content: Person Image -->
+    <div class="absolute right-0 bottom-0 w-full lg:w-3/5 pointer-events-none z-0 flex justify-end items-end h-[calc(100%+64px)] md:h-[calc(100%+80px)] lg:h-[calc(100%+100px)]">
+      <!-- A imagem agora é exatamente do tamanho do HeroSection + margem de escape, escalando perfeitamente sem ficar gigante ou ser cortada -->
+      <img alt="Gustavo Mariano" class="person-image h-full w-auto max-w-none object-contain object-bottom lg:translate-x-[5%] z-0" src="1-removebg-preview.png"/>
+    </div>
+  </div>
+  <!-- END: HeroSection -->
+
+  <!-- BEGIN: LinksSliderSection -->
+  <div class="relative z-20 px-6 lg:px-12 pb-8 lg:pb-12 mt-auto" data-purpose="card-carousel">
+    <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-nowrap lg:overflow-x-auto gap-4 pb-4 snap-x snap-mandatory hide-scrollbar scroll-smooth">
+      
+      <!-- Card 1: LinkedIn -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="linkedin"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">LinkedIn</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-up-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Acessar</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Endereço -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="map-pin"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Endereço</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-up-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Ver no mapa</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Site Pessoal -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="user"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Site Pessoal</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-up-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Visitar</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Site LDR -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="building"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Site LDR</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-up-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Acessar</span>
+        </div>
+      </a>
+
+      <!-- Card 5: Site Aureum -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="landmark"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Site Aureum</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-up-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Acessar</span>
+        </div>
+      </a>
+
+      <!-- Card 6: Contato -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="phone"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Contato</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Falar agora</span>
+        </div>
+      </a>
+
+      <!-- Card 7: Formulário -->
+      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+        <div>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="clipboard-list"></i>
+          <h3 class="font-bold leading-tight text-gray-900 text-lg">Formulário</h3>
+        </div>
+        <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
+          <span class="bg-gray-200 p-1.5 rounded-full group-hover:bg-gray-800 group-hover:text-white transition-all"><i class="w-3 h-3" data-lucide="arrow-right"></i></span>
+          <span class="underline underline-offset-4 decoration-2">Preencher</span>
+        </div>
+      </a>
+
+    </div>
+
+    <!-- Carousel Navigation -->
+    <div class="hidden lg:flex gap-2 mt-8 relative z-20">
+      <button id="btn-prev" class="w-10 h-10 border border-white/50 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-blue-900 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2">
+        <i class="w-5 h-5" data-lucide="arrow-left"></i>
+      </button>
+      <button id="btn-next" class="w-10 h-10 border border-white/50 rounded-full flex items-center justify-center text-white hover:bg-white hover:text-blue-900 transition-all focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2">
+        <i class="w-5 h-5" data-lucide="arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  <!-- END: LinksSliderSection -->
+</main>
+<!-- END: MainContainer -->
+
+<!-- BEGIN: Footer -->
+<footer class="footer-bg w-full mx-auto mt-6 p-6 lg:p-8 text-blue-50 text-xs relative overflow-hidden shadow-lg" data-purpose="page-footer">
+  <!-- Footer Decorative Text -->
+  <div class="absolute inset-0 opacity-[0.03] pointer-events-none flex items-center justify-center">
+    <span class="text-7xl lg:text-9xl font-black italic">MARIANO</span>
+  </div>
+  
+  <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6 lg:gap-8">
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-3">
+        <img alt="Gustavo Mariano Logo" class="h-8 lg:h-10 opacity-80 hover:opacity-100 transition-opacity" src="logo_animacao1.svg"/>
+        <span class="font-bold text-white text-lg">Gustavo Mariano</span>
+      </div>
+    </div>
+    
+    <div class="text-center md:text-right max-w-2xl">
+      <p class="mb-3 text-white/80 leading-relaxed text-[10px] lg:text-xs">
+        *Atenção: Nós não compartilhamos seu contato com terceiros. O tratamento de dados nesta empresa acontece em conformidade com a Lei Geral de Proteção de Dados (LGPD). Você está seguro(a) e poderá se descadastrar a qualquer momento.
+      </p>
+      <p class="text-white font-bold text-[10px] lg:text-xs">© 2026 Gustavo Mariano - Todos os Direitos Reservados</p>
+    </div>
+  </div>
+</footer>
+<!-- END: Footer -->
+
+<script data-purpose="icon-initialization">
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Carousel Navigation Logic
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById('cards-container');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+
+      if (container && btnPrev && btnNext) {
+        btnNext.addEventListener('click', () => {
+          container.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+        btnPrev.addEventListener('click', () => {
+          container.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+      }
+    });
+</script>
+</body>
+</html>
