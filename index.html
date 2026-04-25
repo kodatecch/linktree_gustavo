@@ -113,11 +113,127 @@
     .hide-scrollbar::-webkit-scrollbar {
       display: none;
     }
+
+    /* Permite que cards sobreponham o topo do container no hover */
+    .cards-clip-wrapper {
+      overflow-x: auto;
+      overflow-y: visible;
+    }
+    @media (min-width: 1024px) {
+      .cards-clip-wrapper {
+        overflow: visible;
+      }
+      .cards-scroll-inner {
+        overflow-x: auto;
+        overflow-y: visible;
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        padding-top: 0.75rem;
+        scroll-snap-type: x mandatory;
+      }
+      .cards-scroll-inner::-webkit-scrollbar { display: none; }
+    }
+
+    /* ===================== ANIMATIONS ===================== */
+
+    /* --- Entry Animations --- */
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideFromRight {
+      from { opacity: 0; transform: translateX(80px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideFromLeft {
+      from { opacity: 0; transform: translateX(-40px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(40px) scale(0.96); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* --- Icon Draw Animation --- */
+    @keyframes drawIcon {
+      from { stroke-dashoffset: 200; opacity: 0; }
+      to   { stroke-dashoffset: 0;   opacity: 1; }
+    }
+    .icon-draw svg {
+      stroke-dasharray: 200;
+      stroke-dashoffset: 200;
+      opacity: 0;
+      animation: drawIcon 0.8s cubic-bezier(0.4,0,0.2,1) forwards;
+    }
+
+    /* --- Float animation for cards (idle) --- */
+    @keyframes floatCard {
+      0%,100% { transform: translateY(0px); }
+      50%     { transform: translateY(-5px); }
+    }
+    .float-card {
+      animation: floatCard 3.5s ease-in-out infinite;
+    }
+    /* stagger float per card index */
+    .float-card:nth-child(1) { animation-delay: 0s; }
+    .float-card:nth-child(2) { animation-delay: 0.4s; }
+    .float-card:nth-child(3) { animation-delay: 0.8s; }
+    .float-card:nth-child(4) { animation-delay: 1.2s; }
+    .float-card:nth-child(5) { animation-delay: 1.6s; }
+    .float-card:nth-child(6) { animation-delay: 2.0s; }
+    .float-card:nth-child(7) { animation-delay: 2.4s; }
+
+    /* --- Entry Animation classes --- */
+    .anim-hero-title {
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s forwards;
+    }
+    .anim-hero-sub {
+      opacity: 0;
+      animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.5s forwards;
+    }
+    .anim-photo {
+      opacity: 0;
+      animation: slideFromRight 1s cubic-bezier(0.4,0,0.2,1) 0.3s forwards;
+    }
+    .anim-header {
+      opacity: 0;
+      animation: slideFromLeft 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s forwards;
+    }
+
+    /* --- Impactful Hover for cards --- */
+    .active-card {
+      background: rgba(243, 244, 246, 0.98);
+      color: #111;
+      border-radius: 1.5rem;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1),
+                  box-shadow 0.35s ease,
+                  background 0.3s ease,
+                  border-color 0.3s ease;
+      cursor: pointer;
+      border: 2px solid transparent;
+      will-change: transform;
+    }
+    .active-card:hover {
+      transform: translateY(-12px) scale(1.04);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.18), 0 0 0 2px rgba(255,255,255,0.9), 0 0 40px rgba(255,255,255,0.25);
+      background: #ffffff;
+      border-color: rgba(24,96,150,0.15);
+    }
+    .active-card:active {
+      transform: translateY(-4px) scale(1.01);
+    }
+    /* Stop float on hover to avoid conflict */
+    .active-card:hover {
+      animation-play-state: paused;
+    }
 </style>
 </head>
 <body class="py-4 px-2 md:py-6 md:px-4 lg:py-8 lg:px-6 bg-white overflow-x-hidden max-w-[100vw]">
 <!-- BEGIN: TopNavigation (Header) -->
-<header class="w-full flex flex-row justify-between items-center mb-4 md:mb-6 px-2 lg:px-4" data-purpose="top-navigation">
+<header class="w-full flex flex-row justify-between items-center mb-4 md:mb-6 px-2 lg:px-4 anim-header" data-purpose="top-navigation">
   <div class="flex items-center gap-3">
     <img alt="Gustavo Mariano Logo" class="h-10 lg:h-12 mix-blend-multiply" id="main-logo" src="logo_animacao1.svg"/>
     <span class="font-bold text-gray-900 text-lg lg:text-xl tracking-tight">Gustavo Mariano</span>
@@ -143,30 +259,32 @@
   <div class="relative flex-grow grid grid-cols-12 px-6 lg:px-12 items-center" data-purpose="hero-content">
     <!-- Left Content -->
     <div class="col-span-12 lg:col-span-6 z-20 py-8 lg:py-12 relative flex flex-col items-start text-left">
-      <h1 class="hero-title text-5xl sm:text-7xl lg:text-8xl text-white mb-4 italic tracking-tight drop-shadow-md z-10 relative">
+      <h1 class="hero-title text-5xl sm:text-7xl lg:text-8xl text-white mb-4 italic tracking-tight drop-shadow-md z-10 relative anim-hero-title">
         MEUS<br/>LINKS
       </h1>
-      <p class="text-blue-50 text-lg lg:text-xl font-medium max-w-[60%] sm:max-w-sm">
+      <p class="text-blue-50 text-lg lg:text-xl font-medium max-w-[60%] sm:max-w-sm anim-hero-sub">
         Confira abaixo <span class="font-bold text-white">meus principais links</span>
       </p>
     </div>
     
     <!-- Right Content: Person Image -->
-    <div class="absolute right-0 bottom-0 w-full lg:w-3/5 pointer-events-none z-0 flex justify-end items-end h-[calc(100%+64px)] md:h-[calc(100%+80px)] lg:h-[calc(100%+100px)]">
-      <!-- A imagem agora é exatamente do tamanho do HeroSection + margem de escape, escalando perfeitamente sem ficar gigante ou ser cortada -->
+    <div class="absolute right-0 bottom-0 w-full lg:w-3/5 pointer-events-none z-0 flex justify-end items-end h-[calc(100%+64px)] md:h-[calc(100%+80px)] lg:h-[calc(100%+100px)] anim-photo">
       <img alt="Gustavo Mariano" class="person-image h-full w-auto max-w-none object-contain object-bottom lg:translate-x-[5%] z-0" src="1-removebg-preview.png"/>
     </div>
   </div>
   <!-- END: HeroSection -->
 
   <!-- BEGIN: LinksSliderSection -->
-  <div class="relative z-20 px-6 lg:px-12 pb-8 lg:pb-12 mt-auto" data-purpose="card-carousel">
-    <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-nowrap lg:overflow-x-auto gap-4 pb-4 snap-x snap-mandatory hide-scrollbar scroll-smooth">
+  <div class="relative z-30 px-6 lg:px-12 pb-8 lg:pb-12 mt-auto" data-purpose="card-carousel">
+    <div class="overflow-visible">
+    <div id="cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-nowrap lg:overflow-x-auto gap-4 pt-3 pb-4 snap-x snap-mandatory hide-scrollbar scroll-smooth">
       
       <!-- Card 1: LinkedIn -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="linkedin"></i>
+          <svg class="w-6 h-6 mb-4 text-gray-700 group-hover:text-[#0077B5] transition-colors" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">LinkedIn</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -176,9 +294,9 @@
       </a>
 
       <!-- Card 2: Endereço -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="map-pin"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="map-pin"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Endereço</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -188,9 +306,9 @@
       </a>
 
       <!-- Card 3: Site Pessoal -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="user"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="user"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Site Pessoal</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -200,9 +318,9 @@
       </a>
 
       <!-- Card 4: Site LDR -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="building"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="building"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Site LDR</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -212,9 +330,9 @@
       </a>
 
       <!-- Card 5: Site Aureum -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="landmark"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="landmark"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Site Aureum</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -224,9 +342,9 @@
       </a>
 
       <!-- Card 6: Contato -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="phone"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="phone"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Contato</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -236,9 +354,9 @@
       </a>
 
       <!-- Card 7: Formulário -->
-      <a href="#" class="active-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start">
+      <a href="#" class="active-card float-card p-6 flex flex-col justify-between h-48 lg:h-52 shadow-xl relative group lg:flex-none lg:w-[280px] snap-start z-10 hover:z-30">
         <div>
-          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-black transition-colors" data-lucide="clipboard-list"></i>
+          <i class="w-6 h-6 mb-4 text-gray-700 group-hover:text-blue-700 transition-colors icon-draw" data-lucide="clipboard-list"></i>
           <h3 class="font-bold leading-tight text-gray-900 text-lg">Formulário</h3>
         </div>
         <div class="flex items-center gap-2 text-sm text-gray-800 font-bold">
@@ -247,6 +365,7 @@
         </div>
       </a>
 
+    </div>
     </div>
 
     <!-- Carousel Navigation -->
@@ -289,8 +408,17 @@
 <!-- END: Footer -->
 
 <script data-purpose="icon-initialization">
-    // Initialize Lucide icons
     lucide.createIcons();
+
+    // After icons render, trigger draw animation with staggered delay
+    document.querySelectorAll('.icon-draw').forEach((el, i) => {
+      el.classList.remove('icon-draw');
+      void el.offsetWidth; // reflow
+      el.classList.add('icon-draw');
+      if (el.querySelector('svg')) {
+        el.querySelector('svg').style.animationDelay = (0.6 + i * 0.1) + 's';
+      }
+    });
 
     // Carousel Navigation Logic
     document.addEventListener("DOMContentLoaded", () => {
@@ -306,6 +434,19 @@
           container.scrollBy({ left: -300, behavior: 'smooth' });
         });
       }
+
+      // Staggered card reveal on entry
+      const cards = document.querySelectorAll('.float-card');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(40px) scale(0.96)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+        setTimeout(() => {
+          card.style.opacity = '';
+          card.style.transform = '';
+          card.style.transition = '';
+        }, 700 + i * 120);
+      });
     });
 </script>
 </body>
