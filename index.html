@@ -448,45 +448,59 @@
         }, 700 + i * 120);
       });
 
-      // --- Mouse Drag to Scroll ---
+      // --- Momentum Drag-to-Scroll ---
       if (container) {
-        let isDown = false;
-        let startX;
-        let scrollLeft;
+        let isDragging = false;
+        let startX, lastX, scrollStart;
+        let velocity = 0;
+        let lastTime, rafId;
         let hasDragged = false;
+        const FRICTION = 0.92; // quanto a velocidade desacelera por frame
 
         container.style.cursor = 'grab';
 
+        function applyMomentum() {
+          velocity *= FRICTION;
+          if (Math.abs(velocity) < 0.5) return;
+          container.scrollLeft -= velocity;
+          rafId = requestAnimationFrame(applyMomentum);
+        }
+
         container.addEventListener('mousedown', (e) => {
-          isDown = true;
+          isDragging = true;
           hasDragged = false;
-          startX = e.pageX - container.offsetLeft;
-          scrollLeft = container.scrollLeft;
+          startX = e.clientX;
+          lastX = e.clientX;
+          scrollStart = container.scrollLeft;
+          velocity = 0;
+          lastTime = performance.now();
+          cancelAnimationFrame(rafId);
           container.style.cursor = 'grabbing';
           container.style.userSelect = 'none';
         });
 
-        container.addEventListener('mouseleave', () => {
-          isDown = false;
-          container.style.cursor = 'grab';
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          const now = performance.now();
+          const dt = now - lastTime || 1;
+          const dx = e.clientX - lastX;
+          velocity = (dx / dt) * 16; // normaliza para ~60fps
+          lastX = e.clientX;
+          lastTime = now;
+          const walked = e.clientX - startX;
+          if (Math.abs(walked) > 4) hasDragged = true;
+          container.scrollLeft = scrollStart - (e.clientX - startX);
         });
 
-        container.addEventListener('mouseup', () => {
-          isDown = false;
+        window.addEventListener('mouseup', () => {
+          if (!isDragging) return;
+          isDragging = false;
           container.style.cursor = 'grab';
           container.style.userSelect = '';
+          rafId = requestAnimationFrame(applyMomentum);
         });
 
-        container.addEventListener('mousemove', (e) => {
-          if (!isDown) return;
-          e.preventDefault();
-          const x = e.pageX - container.offsetLeft;
-          const walk = (x - startX) * 1.5;
-          if (Math.abs(walk) > 5) hasDragged = true;
-          container.scrollLeft = scrollLeft - walk;
-        });
-
-        // Block link clicks if user dragged (not just clicked)
+        // Block link clicks when dragged
         container.addEventListener('click', (e) => {
           if (hasDragged) {
             e.preventDefault();
